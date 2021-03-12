@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable< ShopifyMVC.Models.Product>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +7,10 @@
     <h1 class="display-4">SHOPIFY</h1>
     <p>Satisfying the needs of our Customers</p>
 </div>
+
+@{ 
+    foreach(var prd in Model)
+    {
+
+    }
+}
