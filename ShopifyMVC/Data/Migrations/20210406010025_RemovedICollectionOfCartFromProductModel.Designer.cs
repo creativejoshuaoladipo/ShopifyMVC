@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopifyMVC.Data;
 
 namespace ShopifyMVC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210406010025_RemovedICollectionOfCartFromProductModel")]
+    partial class RemovedICollectionOfCartFromProductModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -385,7 +387,7 @@ namespace ShopifyMVC.Data.Migrations
                         .HasForeignKey("CartStatusId");
 
                     b.HasOne("ShopifyMVC.Models.Product", "Product")
-                        .WithMany("Cart")
+                        .WithMany()
                         .HasForeignKey("ProductId");
 
                     b.Navigation("CartStatus");
@@ -405,11 +407,6 @@ namespace ShopifyMVC.Data.Migrations
             modelBuilder.Entity("ShopifyMVC.Models.Category", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("ShopifyMVC.Models.Product", b =>
-                {
-                    b.Navigation("Cart");
                 });
 #pragma warning restore 612, 618
         }

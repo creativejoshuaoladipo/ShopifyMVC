@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ShopifyMVC.Models.Category>
+
+<div class="container">
+    <div>
+        <a asp-controller="Categories" asp-action="AddCategory" class="btn btn-primary float-right"> Create New Category</a>
+    </div>
+
+    <h1>Category Table</h1>
+
+    <div>
+
+        <table class="table table-bordered ">
+            <thead>
+                <tr>
+                    <th>Category Name </th>
+                    <th>IsActive </th>
+                    <th>IsDeleted </th>
+                    <th>Edit/Delete</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <td> @category.Name</td>
+                        <td> @category.IsActive</td>
+                        <td> @category.IsDelete</td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <a asp-route-Id="@category.Id" asp-action="EditCategory" class="btn btn-primary m-2">Edit</a>
+                                <a asp-route-Id="@category.Id" asp-action="DeleteCategory" class="btn btn-primary m-2">Delete</a>
+
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+
+        </table>
+
+    </div>
+
+
+</div>
+

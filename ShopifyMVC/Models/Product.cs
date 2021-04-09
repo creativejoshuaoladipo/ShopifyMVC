@@ -15,9 +15,7 @@ namespace ShopifyMVC.Models
         public bool? IsDelete { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }
-        [Required]
         public string Description { get; set; }
-        [Required]
         public string ProductImage { get; set; }
         public bool? IsFeatured { get; set; }
         public int? Quantity { get; set; }

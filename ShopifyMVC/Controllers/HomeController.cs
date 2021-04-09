@@ -23,6 +23,7 @@ namespace ShopifyMVC.Controllers
 
         public IActionResult Index()
         {
+            
            var productList = _db.Products.ToList();
             return View(productList);
         }

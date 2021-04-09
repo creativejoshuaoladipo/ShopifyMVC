@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ShopifyMVC.Models.Product>
+@{
+}
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2>Products List</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-controller="Products" asp-action="AddProduct" class="btn btn-primary">
+                <i class="fas fa-plus"></i> &nbsp; Create New Product
+            </a>
+        </div>
+    </div>
+
+    <br /><br />
+
+    <div class="container">
+        <p>These are the list of the available products in the database</p>
+
+        <table class="table table-bordered">
+
+            <thead>
+
+                <tr>
+                    <th>Name</th>
+                    <th>CategoryId</th>
+                    <th>Quality</th>
+                    <th>Price</th>
+                    <th>Edit/Delete</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var product in Model)
+                {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.CategoryId</td>
+                    <td>@product.Quantity</td>
+                    <td>@product.Price</td>
+                    <td>
+                        <div class=" btn-group row">
+                            <a asp-route-Id ="@product.Id" asp-action="EditProduct" class="btn btn-primary m-2">Edit </a>
+                            <a asp-route-Id ="@product.Id" asp-action="DeleteProduct" class="btn btn-primary m-2">Delete</a>
+                        </div>
+                    </td>
+
+                </tr>
+                }
+
+            </tbody>
+
+        </table>
+    </div>
+
+
