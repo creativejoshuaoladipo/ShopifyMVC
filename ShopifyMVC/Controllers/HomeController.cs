@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using ShopifyMVC.Data;
 using ShopifyMVC.Models;
+using ShopifyMVC.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,9 +24,13 @@ namespace ShopifyMVC.Controllers
 
         public IActionResult Index()
         {
-            
-           var productList = _db.Products.ToList();
-            return View(productList);
+            HomeVM homeVM = new HomeVM()
+            {
+                Categories = _db.Category.ToList(),
+                Products = _db.Products.ToList()
+
+            };
+            return View(homeVM);
         }
 
         public IActionResult Privacy()

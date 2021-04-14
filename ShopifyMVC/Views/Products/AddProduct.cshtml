@@ -61,7 +61,7 @@
                     Image
                 </div>
                 <div class="col-8">
-                    <input type="file" name="files" id="uploadBox" multiple class="form-control" />
+                    <input type="file" name="files" id="uploadImage" multiple class="form-control" />
                 </div>
 
             </div>
@@ -83,7 +83,7 @@
                 <div class="col-8 offset-4 row">
 
                     <div class="col">                                     
-                            <input type="submit" class="btn btn-primary w-100" value="Create" />
+                            <input onclick="return validateImageInput()" type="submit" class="btn btn-primary w-100" value="Create" />
                     </div>
                     <div class="col">
                         <a asp-action="Index" class="btn btn-success w-100"><i class="fas fa-sign-out-alt"></i> Back</a>
@@ -128,16 +128,24 @@
     }*@
 
 
-@*@section Script{
+@section Scripts{
 
     <script>
-        Swal.fire({
-            title: 'Error!',
-            text: 'Do you want to continue',
-            icon: 'error',
-            confirmButtonText: 'Cool'
-        })
+        function validateImageInput() {
+            //We want to check if the user selected an image
+            if (document.getElementById("uploadImage").value == "") {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'No Image Uploaded, Remember to add an image',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
+
+                return false;
+            } else
+                return true;
+        }    
     </script>
 
    
-}*@
+}

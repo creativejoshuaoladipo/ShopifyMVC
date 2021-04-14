@@ -271,6 +271,32 @@ namespace ShopifyMVC.Controllers
         }
 
 
+        [HttpPost]
+        [ActionName("DeleteProduct")]
+        public IActionResult DeleteProductPost(int? id)
+        {
+
+            var DbProduct = _db.Products.Find(id);
+
+            var webRootPath = _webHostEnvironment.WebRootPath;
+
+            var imageFolderPath = webRootPath + @"\ProductImages\";
+
+            var imageLocation = Path.Combine(imageFolderPath, DbProduct.ProductImage);
+
+
+            if (System.IO.File.Exists(imageLocation))
+            {
+                System.IO.File.Delete(imageLocation);
+            }
+
+
+            _db.Products.Remove(DbProduct);
+
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
        
 
 
