@@ -33,6 +33,25 @@ namespace ShopifyMVC.Controllers
             return View(homeVM);
         }
 
+        public IActionResult ProductDetails(int? id)
+        {
+
+            if (id == null || id== 0)
+            {
+                return NotFound();
+            }
+
+            DetailsVM detailsVM = new DetailsVM();
+
+            var product = _db.Products.Find(id);
+
+            detailsVM.Product = product;
+
+            return View(detailsVM);
+        }
+
+
+
         public IActionResult Privacy()
         {
             return View();

@@ -38,6 +38,24 @@ namespace ShopifyMVC
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            //Adding Session
+            //First Add Distributed Memory Cache
+            services.AddDistributedMemoryCache();
+
+            //Secondly Add the HttpContextAccessor
+            services.AddHttpContextAccessor();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            }
+
+                );
+
+
             services.AddControllersWithViews();
         }
 
@@ -57,6 +75,9 @@ namespace ShopifyMVC
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            //ADDING SESSION TO THE MIDDLEwARE PIPELINE
+            app.UseSession();
 
             app.UseRouting();
 

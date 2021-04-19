@@ -58,9 +58,15 @@
     <br />
 
     <div class="row">
+
+
+           
+
+
         @*//Display Products for each Categories using Partial View*@
         @foreach (var prod in Model.Products)
         {
+
             <partial name="_ProductCard" model="prod" />
         }
 

@@ -71,5 +71,35 @@ namespace ShopifyMVC.Controllers
         }
 
 
+        public IActionResult DeleteCategory(int? Id)
+        {
+
+            if (Id == null || Id == 0)
+            {
+                return NotFound();
+            }
+
+            var category = _db.Category.Where(c => c.Id == Id).FirstOrDefault();
+
+            return View(category);
+        }
+
+
+        [HttpPost]
+        public IActionResult DeleteCategory(Category objVM)
+        {
+
+            if (!ModelState.IsValid)
+            {
+                return View(objVM);
+            }
+
+            _db.Category.Remove(objVM);
+            _db.SaveChanges();
+
+            return RedirectToAction("index");
+        }
+
+
     }
 }
