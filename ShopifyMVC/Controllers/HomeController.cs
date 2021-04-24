@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ShopifyMVC.Data;
 using ShopifyMVC.Models;
@@ -27,12 +28,20 @@ namespace ShopifyMVC.Controllers
             HomeVM homeVM = new HomeVM()
             {
                 Categories = _db.Category.ToList(),
-                Products = _db.Products.ToList()
+                Products = _db.Products.Include(u=>u.Category).ToList()
 
             };
             return View(homeVM);
         }
 
+
+        /**
+         * Anytime a Product in the Shop is clicked, we are to help the user display the product details
+         * We get the product details from the Database and display it in the the view. 
+         * However it is possible that the user already havethe product in the Cart, so we have add to change
+         * the button from add to cart to Remove from the Cart
+         *  
+         */
         public IActionResult ProductDetails(int? id)
         {
 
@@ -41,15 +50,57 @@ namespace ShopifyMVC.Controllers
                 return NotFound();
             }
 
-            DetailsVM detailsVM = new DetailsVM();
+            DetailsVM detailsVM = new DetailsVM()
+            {
+                Product = _db.Products.Include(p => p.Category).FirstOrDefault(u => u.Id == id),
+                ExistInCart = false
+            };
+                
+            List<ShoppingCart> cartList = new List<ShoppingCart>();
 
-            var product = _db.Products.Find(id);
+            if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstant.SessionKey) != null 
+                && HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstant.SessionKey).Count() > 0)
+            {
+                cartList = HttpContext.Session.Get<List<ShoppingCart>>(WebConstant.SessionKey);
+            }
 
-            detailsVM.Product = product;
+            //Exact the ProductIds from the List inside the cart
+            //1. Iterate through the List and check if any ProductId == id of the Specific Product(Parameter Id)
+            //2. if yes then change the ExistINCart to true
+
+            foreach(var item in cartList)
+            {
+                if (item.ProductId == id)
+                {
+                    detailsVM.ExistInCart = true;
+                }
+            }
+
 
             return View(detailsVM);
         }
 
+
+        [HttpPost]
+        public IActionResult ProductDetails(int id, DetailsVM detailsVM)
+        {
+            List<ShoppingCart> newCartList = new List<ShoppingCart>();
+
+            //Before Adding- get the initial Values in the Session
+            if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstant.SessionKey) != null &&
+                HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstant.SessionKey).Count() > 0)     
+            {
+                newCartList = HttpContext.Session.Get<List<ShoppingCart>>(WebConstant.SessionKey);
+            }
+            //Aftergetting the initial Valuein the session- add the new ProductID
+            newCartList.Add(new ShoppingCart { ProductId = id });
+
+            //Set the New Session Dictionary  with the new Cart List
+            HttpContext.Session.Set<IEnumerable<ShoppingCart>>(WebConstant.SessionKey, newCartList);
+
+
+            return RedirectToAction("Index");
+        }
 
 
         public IActionResult Privacy()

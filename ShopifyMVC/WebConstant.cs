@@ -8,5 +8,6 @@ namespace ShopifyMVC
     public static class WebConstant
     {
         public static string ImagePath = @"\ProductImages\";
+        public static string SessionKey = "SessionKey";
     }
 }

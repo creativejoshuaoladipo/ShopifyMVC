@@ -1,7 +1,7 @@
 ﻿@model ShopifyMVC.Models.ViewModels.DetailsVM
 
 <div class="">
-    <form asp-controller="Cart" asp-action="AddToCart" method="post" >
+    <form asp-action="Details" method="post" >
         <input type="text" asp-route-id ="@Model.Product.Id"  hidden/>
         <div class="container backgroundWhite pt-4">
             <div class="card" style="border:1px solid #000000; ">
@@ -41,8 +41,15 @@
                             <a class="btn btn-success btn-square form-control btn-lg" style="height:50px;">Back to List</a>
                         </div>
                         <div class="col-12 col-md-6 ">
+                            @if (Model.ExistInCart)
+                            {
+                                <a asp-controller="Cart" asp-action="RemoveFromCart" asp-route-id="@Model.Product.Id" class="btn btn-danger form-control btn-lg" style="height:50px;">Remove From Cart</a>
+                            }
+                            else
+                            {
+                                <button type="submit" asp-route-id="@Model.Product.Id" class="btn btn-info form-control btn-lg" style="height:50px;">Add to Cart</button>
 
-                            <button type="submit" class="btn btn-info form-control btn-lg" style="height:50px;" >Add to Cart</button>
+                            }
 
                         </div>
                     </div>

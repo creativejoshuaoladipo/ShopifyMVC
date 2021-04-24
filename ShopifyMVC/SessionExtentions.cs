@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Newtonsoft.Json;
+using System.Text.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,22 +15,24 @@ namespace ShopifyMVC
         public static void Set<T>(this ISession session, string key, T value)
         {
 
-            session.SetString(key, JsonConvert.SerializeObject(value));
+            session.SetString(key, JsonSerializer.Serialize(value));
         }
 
 
         public static T Get<T>(this ISession session, string key)
         {
             //We will first Check the Session Object to be sure that there is an object value in it
+
             var value = session.GetString(key);
+            //return value == null ? default : JsonSerializer.Deserialize<T>(value);
 
             if (value == null)
             {
                 return default;
             }
             else
-                
-            return JsonConvert.DeserializeObject<T>(value);
+
+                return JsonSerializer.Deserialize<T>(value);
         }
     }
 }
