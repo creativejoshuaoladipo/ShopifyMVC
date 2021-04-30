@@ -26,7 +26,8 @@
                     <th>CategoryId</th>
                     <th>Quality</th>
                     <th>Price</th>
-                    <th>Edit/Delete</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
 
@@ -38,11 +39,13 @@
                     <td>@product.CategoryId</td>
                     <td>@product.Quantity</td>
                     <td>@product.Price</td>
-                    <td>
+                    <td class="text-center">
                         <div class=" btn-group row">
                             <a asp-route-Id ="@product.Id" asp-action="EditProduct" class="btn btn-primary m-2">Edit </a>
-                            <a asp-route-Id ="@product.Id" asp-action="DeleteProduct" class="btn btn-primary m-2">Delete</a>
                         </div>
+                    </td>
+                    <td class="text-center">
+                        <a asp-route-Id="@product.Id" asp-action="DeleteProduct" class="btn btn-primary m-2">Delete</a>
                     </td>
 
                 </tr>

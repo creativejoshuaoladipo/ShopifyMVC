@@ -3,71 +3,71 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-2">SHOPIFY</h1>
-    <p>Satisfying the needs of our Customers</p>
-</div>
-
-
-
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="~/CarouselImages/befpic web.jpg" class="d-block w-100" alt="BEFPIC">
+<div class="product-area pt-100 pb-70">
+    <div class="container">
+        <div class="section-title-6 text-center">
+            <h2>New Arrivals</h2>
         </div>
-        <div class="carousel-item">
-            <img src="~/CarouselImages/befpic web1.jpg" class="d-block w-100" alt="...">
+        <div class="product-tab-list nav pt-30 pb-55 text-center">
+            <a class="active" href="#product-1" data-toggle="tab">
+                <h4>New Arrivals  </h4>
+            </a>
+            <a href="#product-2" data-toggle="tab">
+                <h4>Best Sellers </h4>
+            </a>
+            <a href="#product-3" data-toggle="tab">
+                <h4>Sale Items</h4>
+            </a>
         </div>
-        <div class="carousel-item">
-            <img src="~/CarouselImages/befpic web2.jpg" class="d-block w-100" alt="...">
+        <div class="tab-content jump">
+            <div class="tab-pane" id="product-1">
+                <div class="row">
+                    @foreach (var product in Model.Products)
+                    {
+                        <div class="col-xl-3 col-md-6 col-lg-4 col-sm-6">
+                            <div class="product-wrap mb-25">
+                                <div class="product-img">
+                                    <a href="/Products/Detail/@product.Id">
+                                        <img class="default-img" src="~/ProductImages/@product.ProductImage" alt="">
+                                        <img class="hover-img" src="~/ProductImages/@product.ProductImage" alt="">
+                                    </a>
+                                    <span class="pink">-10%</span>
+                                    <div class="product-action">
+                                        <div class="pro-same-action pro-wishlist">
+                                            <a title="Wishlist" href="wishlist.html"><i class="pe-7s-like"></i></a>
+                                        </div>
+                                        <div class="pro-same-action pro-cart">
+                                            <a title="Add To Cart" href="#"><i class="pe-7s-cart"></i> Add to cart</a>
+                                        </div>
+                                        <div class="pro-same-action pro-quickview">
+                                            <a title="Quick View" href="#" data-toggle="modal" data-target="#exampleModal"><i class="pe-7s-look"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-content text-center">
+                                    <h3><a href="/Products/Detail/@product.Id">@product.Name</a></h3>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o yellow"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </div>
+                                    <div class="product-price">
+                                        <span>₦ @product.Price</span>
+                                        <span class="old">$ 60.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    }
+
+                </div>
+            </div>
+
+
         </div>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-    </button>
 </div>
-<div>
-    <img style="height:320px;width:100%" src="/CarouselImages/befpic web3.jpg" alt="Third slide">
-
-</div>
-
-
-<br />
-
-
-<div class="container">
-
-    <div class="text-center">
-        <h2>Our Products</h2>
-
-        <br />
-
-        @foreach (var item in Model.Categories)
-        {
-            <button class="btn btn-info"> @item.Name</button>
-
-        }
-
-    </div>
-
-    <br />
-
-    <div class="row">
-        @*//Display Products for each Categories using Partial View*@
-        @foreach (var prod in Model.Products)
-        {
-            <partial name="_ProductCard" model="prod" />
-        }
-
-
-    </div>
-
-</div>
-
-
-

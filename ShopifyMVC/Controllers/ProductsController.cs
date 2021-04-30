@@ -298,6 +298,31 @@ namespace ShopifyMVC.Controllers
             return RedirectToAction("Index");
         }
        
+        [HttpGet]
+
+        public IActionResult Detail(int? id)
+        {
+
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            ProductDetailVM pvm = new ProductDetailVM();
+
+            var dbProduct = _db.Products.Where(p => p.Id == id).AsNoTracking().FirstOrDefault();
+            if(dbProduct != null)
+            {
+                pvm.Product = dbProduct;
+
+                return View("Detail",pvm);
+            }
+
+            return NotFound();
+
+
+
+        }
 
 
 

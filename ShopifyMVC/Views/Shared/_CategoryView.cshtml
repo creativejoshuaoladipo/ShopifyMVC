@@ -1,0 +1,26 @@
+﻿@model ShopifyMVC.Models.ViewModels.HomeVM
+<div class="collections-area pt-100 pb-100">
+    <div class="container">
+        <div class="collection-wrap">
+            <div class="collection-active owl-carousel owl-dot-none">
+                @foreach (var category in Model.Categories)
+                {
+                    <div class="collection-product">
+                        <div class="collection-img">
+                            <a href="product-details.html"><img src="assets/img/product/hm20-pro-1.png" alt=""></a>
+                        </div>
+                        <div class="collection-content text-center">
+                            <span>25 Products</span>
+                            <h4><a href="product-details.html">@category.Name</a></h4>
+                            <div class="collection-btn btn-hover btn-only-round">
+                                <a href="#">SHOP NOW</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+
+            </div>
+        </div>
+    </div>
+</div>
