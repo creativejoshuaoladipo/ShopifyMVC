@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,6 +23,10 @@ namespace ShopifyMVC.Models
         public double? Price { get; set; }
         public ICollection<Cart> Cart { get; set; }
         public Category Category { get; set; }
+
+        [NotMapped]
+        [Range(0,100, ErrorMessage ="You can takemore than 100 item at a time")]
+        public int numberOfItemSelected { get; set; }
 
         public Product()
         {
