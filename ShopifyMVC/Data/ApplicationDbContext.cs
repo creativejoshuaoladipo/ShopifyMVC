@@ -17,7 +17,9 @@ namespace ShopifyMVC.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Cart> Cart { get; set; }
-        public DbSet<CartStatus> CartSttus { get; set; }
+        public DbSet<CartStatus> CartStatus { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
 
 
 

@@ -25,8 +25,8 @@ namespace ShopifyMVC.Controllers
             List<ShoppingCart> newCartList = new List<ShoppingCart>();
 
             //Before Adding- get the initial Values in the Session
-            if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstant.SessionKey).Count() > 0 &&
-                HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstant.SessionKey) != null)
+            if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstant.SessionKey) != null
+               && HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstant.SessionKey).Count() > 0)
             {
                 newCartList = HttpContext.Session.Get<List<ShoppingCart>>(WebConstant.SessionKey);
             }
@@ -45,8 +45,8 @@ namespace ShopifyMVC.Controllers
             List<ShoppingCart> newCartList = new List<ShoppingCart>();
 
             //Before Adding- get the initial Values in the Session
-            if(HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstant.SessionKey).Count() > 0 &&
-                HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstant.SessionKey) != null)
+            if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstant.SessionKey) != null
+                && HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstant.SessionKey).Count() > 0)
             {
                 newCartList = HttpContext.Session.Get<List<ShoppingCart>>(WebConstant.SessionKey);
             }
@@ -68,8 +68,8 @@ namespace ShopifyMVC.Controllers
             List<ShoppingCart> previousCartList = new List<ShoppingCart>();
 
             //Before Adding- get the initial Values in the Session
-            if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstant.SessionKey).Count() > 0 &&
-                HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstant.SessionKey) != null)
+            if (HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstant.SessionKey) != null
+                && HttpContext.Session.Get<IEnumerable<ShoppingCart>>(WebConstant.SessionKey).Count() > 0)
             {
                 previousCartList = HttpContext.Session.Get<List<ShoppingCart>>(WebConstant.SessionKey);
             }

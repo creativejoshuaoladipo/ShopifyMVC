@@ -47,9 +47,13 @@
 
         <br />
 
+        @*/Category Buttons to filter the Product based on their individual Category/*@
+        <button class="btn btn-info filter-button" data-filter="all"> All</button>
+
         @foreach (var item in Model.Categories)
         {
-            <button class="btn btn-info"> @item.Name</button>
+
+            <button class="btn btn-info filter-button" data-filter="@item.Name.Replace(' ','_')"> @item.Name</button>
 
         }
 
@@ -58,10 +62,6 @@
     <br />
 
     <div class="row">
-
-
-           
-
 
         @*//Display Products for each Categories using Partial View*@
         @foreach (var prod in Model.Products)
@@ -76,4 +76,49 @@
 </div>
 
 
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+
+            $(".filter-button").click(function () {
+
+                var value = $(this).attr('data-filter');
+                if (value == "all") {
+                    $('.filter').show('1000');
+                }
+                else {
+                    $(".filter").not('.'+value).hide('3000');
+                    $(".filter").filter('.'+value).show('3000');
+
+                }
+            });
+
+        });
+    </script>
+}
+
+@*@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+
+            $(".filter-button").click(function () {
+
+                var value = $(this).attr('data-filter');
+
+                if (value == "all") {
+                    $('.filter').show('3000');
+                }
+                else {
+                    //First hide the element that are not with the value
+                    $('.filter').not('.' + value).hide('3000');
+                    $('.filter').filter('.' + value).show('3000');
+                }
+            });
+
+
+        });
+
+    </script>
+}*@
 

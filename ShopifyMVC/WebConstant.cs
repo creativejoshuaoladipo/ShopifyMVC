@@ -9,5 +9,7 @@ namespace ShopifyMVC
     {
         public static string ImagePath = @"\ProductImages\";
         public static string SessionKey = "SessionKey";
+        public static string AdminRole = "AdminRole";
+        public static string CustomerRole = "CustomerRole";
     }
 }
